@@ -23,7 +23,7 @@ public class Batsman {
 	public int runs;
 	
 	@CsvBindByName(column = "HS", required =true)
-	public String highestScore;
+	public int highestScore;
 	
 	@CsvBindByName(column = "Avg", required =true)
 	public double average;
