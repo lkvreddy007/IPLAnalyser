@@ -1,8 +1,12 @@
 package com.capg;
 
+import java.util.List;
+
 import org.junit.Test;
 
+import com.capg.dto.Batsman;
 import com.capg.dto.IPLAnalyserException;
+import com.capg.service.BatsmanSorterComparators;
 import com.capg.service.IPLAnalyser;
 
 import junit.framework.Assert;
@@ -11,12 +15,27 @@ public class IPLAnalyserTest {
 	
 	private static final String BATSMAN_CSV_FILE_PATH = "./src/test/resources/MostRuns.csv";
 	IPLAnalyser iplAnalyser = new IPLAnalyser();
+	BatsmanSorterComparators batsmenComparator = new BatsmanSorterComparators();
 	
 	@Test
 	public void givenBatsmenData_ShouldReturnNoOfBatsman() {
 		try {
-			int numOfBatsmen = iplAnalyser.loadBatsmanData(BATSMAN_CSV_FILE_PATH);
-			Assert.assertEquals(101, numOfBatsmen);
+			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
+			Assert.assertEquals(101, batsmenList.size());
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void givenBatsmenData_ShouldReturnHighestBattingAverage() {
+		try {
+			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
+			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByBattingAverage(), batsmenList);
+			for(Batsman b:sortedList) {
+				System.out.println(b.player+"--"+b.average);
+			}
+			Assert.assertEquals("MS Dhoni", sortedList.get(100).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
 		}

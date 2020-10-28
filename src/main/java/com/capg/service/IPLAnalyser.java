@@ -1,47 +1,34 @@
 package com.capg.service;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-import com.capg.CSVBuilderFactory;
-import com.capg.CSVException;
-import com.capg.ICSVBuilder;
-import com.capg.dto.Batsman;
 import com.capg.dto.IPLAnalyserException;
-import com.capg.dto.IPLAnalyserException.ExceptionType;
+import com.capg.dto.Batsman;
+import com.capg.dto.CsvLoader;
 
-public class IPLAnalyser {
-	
-	List<Batsman> csvBatsmanFileList = new ArrayList<>();
+public class IPLAnalyser<E> {
 	
 	public static void main(String[] args) {
 		System.out.println("Welcome to IPL Analyser");
 	}
 
-	public int loadBatsmanData(String csvFilePath) throws IPLAnalyserException {
-		if(!csvFilePath.contains(".csv")) {
-			throw new IPLAnalyserException("Invalid File Type(.csv required)", ExceptionType.INVALID_FILE_FORMAT);
-		}
-		try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
-			ICSVBuilder csvBuilder=CSVBuilderFactory.createCSVBuilder();
-			csvBatsmanFileList = csvBuilder.getCSVList(reader,Batsman.class);
-			return this.csvBatsmanFileList.size();
-		}
-		catch (IOException e) {
-			throw new IPLAnalyserException("Census File Problem", ExceptionType.CENSUS_FILE_PROBLEM);
-		}
-		catch (NullPointerException e) {
-			throw new IPLAnalyserException("Null Data", ExceptionType.NULL_VALUES_ENCOUNTERED);
-		}
-		catch(RuntimeException e) {
-			throw new IPLAnalyserException("Invalid Delimiter", ExceptionType.ERROR_IN_FILE);
-		}
-		catch(CSVException e) {
-			throw new IPLAnalyserException("Unable to parse", ExceptionType.UNABLE_TO_PARSE);
-		}		
+	public List<E> loadCsvFile(String csvFilePath, Class<E> csvClass) throws IPLAnalyserException {
+		return new CsvLoader<E>().csvFileLoader(csvFilePath, csvClass);
 	}
+	
+	public List<Batsman> sortBatsmenData(Comparator<Batsman> comparator, List<Batsman> csvList){
+		for(int j=0;j<csvList.size();j++) {
+			for(int i=0;i<csvList.size()-1;i++) {
+				Batsman player1 = csvList.get(i);
+				Batsman player2 = csvList.get(i+1);
+				if(comparator.compare(player1, player2)>0) {
+					csvList.set(i, player2);
+					csvList.set(i+1, player1);
+				}
+			}
+		}
+		return csvList;
+	}
+	
 }
