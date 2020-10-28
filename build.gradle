@@ -29,3 +29,8 @@ dependencies {
     
     compile 'com.opencsv:opencsv:5.3'
 }
+
+dependencies{
+	implementation fileTree(dir:'libs',include:['*.jar'])
+}
+
