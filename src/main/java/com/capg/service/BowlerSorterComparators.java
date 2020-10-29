@@ -26,8 +26,16 @@ public class BowlerSorterComparators {
 		return this.sortByBowlerStrikeRate().thenComparing(this.sortBy4wAnd5w());
 	}
 
-	public Comparator sortByBowlerAverageAndStrikeRate() {
+	public Comparator<Bowler> sortByBowlerAverageAndStrikeRate() {
 		return this.sortByBowlingAverage().thenComparing(this.sortByBowlerStrikeRate());
+	}
+	
+	public Comparator<Bowler> sortByNumOfWickets() {
+		return Comparator.comparing(bowler->bowler.wickets);
+	}
+
+	public Comparator<Bowler> sortByBowlerNumOfWicketsAndAverages() {
+		return this.sortByNumOfWickets().thenComparing(this.sortByBowlingAverage());
 	}
 
 }
