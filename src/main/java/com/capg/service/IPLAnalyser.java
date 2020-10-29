@@ -50,5 +50,18 @@ public class IPLAnalyser<E> {
 		}
 		return allRounderList;
 	}
+
+	public List<Batsman> loadBatsmanWithZeroCenturiesAndHalfCenturies() throws IPLAnalyserException {
+		String batsmanCsvFile = "./src/test/resources/MostRuns.csv";
+		IPLAnalyser iplAnalyser = new IPLAnalyser();
+		List<Batsman> batsmanList = iplAnalyser.loadCsvFile(batsmanCsvFile, Batsman.class);
+		List<Batsman> zeroCenturiesAndZeroHalfCenturiesList = new ArrayList<Batsman>();
+		for(Batsman bat : batsmanList) {
+			if(bat.centuries == 0 & bat.halfCenturies == 0) {
+				zeroCenturiesAndZeroHalfCenturiesList.add(bat);
+			}
+		}
+		return zeroCenturiesAndZeroHalfCenturiesList;
+	}
 	
 }
