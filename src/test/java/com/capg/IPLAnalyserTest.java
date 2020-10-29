@@ -180,7 +180,7 @@ public class IPLAnalyserTest {
 	
 	//UC13
 	@Test
-	public void givenBowlerData_ShouldSortCricketersByBothBattingAnBowlingAverages() {
+	public void givenBothBatsmanAndBowlerData_ShouldSortCricketersByBothBattingAnBowlingAverages() {
 		try {
 			List<AllRounder> allRounderList = iplAnalyser.loadAllRounders();
 			List<AllRounder> sortedList = iplAnalyser.sort(allRounderComparator.sortByCricketersBattingAnBowlingAverages(), allRounderList);
@@ -192,11 +192,23 @@ public class IPLAnalyserTest {
 	
 	//UC14
 	@Test
-	public void givenBowlerData_ShouldSortCricketersByRunsAndWickets() {
+	public void givenBothBatsmanAndBowlerData_ShouldSortCricketersByRunsAndWickets() {
 		try {
 			List<AllRounder> allRounderList = iplAnalyser.loadAllRounders();
 			List<AllRounder> sortedList = iplAnalyser.sort(allRounderComparator.sortByAllRounderRunsAndWickets(), allRounderList);
 			Assert.assertEquals("Hardik Pandya", sortedList.get(sortedList.size()-1).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//UC15
+	@Test
+	public void givenBatsmandData_ShouldSortCricketersByHundredsAndBattingAverages() {
+		try {
+			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
+			List<Batsman> sortedList = iplAnalyser.sort(batsmenComparator.sortByCenturiesAndAverage(), batsmenList);
+			Assert.assertEquals("David Warner", sortedList.get(100).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
 		}
