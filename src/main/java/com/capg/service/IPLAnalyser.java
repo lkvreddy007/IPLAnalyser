@@ -1,9 +1,11 @@
 package com.capg.service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import com.capg.dto.IPLAnalyserException;
+import com.capg.dto.AllRounder;
 import com.capg.dto.Batsman;
 import com.capg.dto.Bowler;
 import com.capg.dto.CsvLoader;
@@ -30,6 +32,23 @@ public class IPLAnalyser<E> {
 			}
 		}
 		return csvList;
+	}
+
+	public List<AllRounder> loadAllRounders() throws IPLAnalyserException {
+		String batsmanCsvFile = "./src/test/resources/MostRuns.csv";
+		String bowlerCsvFile = "./src/test/resources/MostWkts.csv";
+		IPLAnalyser iplAnalyser = new IPLAnalyser();
+		List<Batsman> batsmanList = iplAnalyser.loadCsvFile(batsmanCsvFile, Batsman.class);
+		List<Bowler> bowlerList = iplAnalyser.loadCsvFile(bowlerCsvFile, Bowler.class);
+		List<AllRounder> allRounderList = new ArrayList<AllRounder>();
+		for(Batsman bat : batsmanList) {
+			for(Bowler bow : bowlerList) {
+				if(bat.player.equals(bow.player)) {
+					allRounderList.add(new AllRounder(bat.player, bat.average, bow.average));
+				}
+			}
+		}
+		return allRounderList;
 	}
 	
 }
