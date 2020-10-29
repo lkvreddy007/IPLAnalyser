@@ -127,4 +127,16 @@ public class IPLAnalyserTest {
 		}
 	}
 	
+	//UC9
+		@Test
+		public void givenBowlerData_ShouldSortBowlersByEconomy() {
+			try {
+				List<Bowler> bowlerList = iplAnalyser.loadCsvFile(BOWLER_CSV_FILE_PATH, Bowler.class);
+				List<Bowler> sortedList = iplAnalyser.sort(bowlerComparator.sortByBowlerEconomy(), bowlerList);
+				Assert.assertEquals("Ben Cutting", sortedList.get(98).player);
+			} catch (IPLAnalyserException e) {
+				e.printStackTrace();
+			}
+		}
+	
 }
