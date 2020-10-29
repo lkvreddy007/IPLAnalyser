@@ -33,5 +33,9 @@ public class BatsmanSorterComparators {
 	public Comparator<Batsman> sortByRunsAndAverage() {
 		return this.sortByRuns().thenComparing(this.sortByBattingAverage());
 	}
+
+	public Comparator<Batsman> sortByCenturiesAndAverage() {
+		return Comparator.comparing(batsman -> batsman.centuries * batsman.average);
+	}
 	
 }
