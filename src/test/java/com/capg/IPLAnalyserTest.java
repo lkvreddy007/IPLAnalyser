@@ -5,8 +5,10 @@ import java.util.List;
 import org.junit.Test;
 
 import com.capg.dto.Batsman;
+import com.capg.dto.Bowler;
 import com.capg.dto.IPLAnalyserException;
 import com.capg.service.BatsmanSorterComparators;
+import com.capg.service.BowlerSorterComparators;
 import com.capg.service.IPLAnalyser;
 
 import junit.framework.Assert;
@@ -14,8 +16,10 @@ import junit.framework.Assert;
 public class IPLAnalyserTest {
 	
 	private static final String BATSMAN_CSV_FILE_PATH = "./src/test/resources/MostRuns.csv";
+	private static final String BOWLER_CSV_FILE_PATH = "./src/test/resources/MostWkts.csv";
 	IPLAnalyser iplAnalyser = new IPLAnalyser();
 	BatsmanSorterComparators batsmenComparator = new BatsmanSorterComparators();
+	BowlerSorterComparators bowlerComparator = new BowlerSorterComparators();
 	
 	@Test
 	public void givenBatsmenData_ShouldReturnNoOfBatsman() {
@@ -31,7 +35,7 @@ public class IPLAnalyserTest {
 	public void givenBatsmenData_ShouldSortBatsmenByBattingAverages() {
 		try {
 			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
-			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByBattingAverage(), batsmenList);
+			List<Batsman> sortedList = iplAnalyser.sort(batsmenComparator.sortByBattingAverage(), batsmenList);
 			Assert.assertEquals("MS Dhoni", sortedList.get(100).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
@@ -42,7 +46,7 @@ public class IPLAnalyserTest {
 	public void givenBatsmenData_ShouldSortBatsmenByStrikeRate() {
 		try {
 			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
-			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByStrikeRate(), batsmenList);
+			List<Batsman> sortedList = iplAnalyser.sort(batsmenComparator.sortByStrikeRate(), batsmenList);
 			Assert.assertEquals("Ishant Sharma", sortedList.get(100).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
@@ -53,7 +57,7 @@ public class IPLAnalyserTest {
 	public void givenBatsmenData_ShouldSortBatsmenByNumberofSixesAndFours() {
 		try {
 			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
-			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByMax4sAnd6s(), batsmenList);
+			List<Batsman> sortedList = iplAnalyser.sort(batsmenComparator.sortByMax4sAnd6s(), batsmenList);
 			Assert.assertEquals("Andre Russell", sortedList.get(100).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
@@ -64,7 +68,7 @@ public class IPLAnalyserTest {
 	public void givenBatsmenData_ShouldSortBatsmenByMaximumNumberofSixesAndFoursAndMaxStrikeRate() {
 		try {
 			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
-			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByMax4sAnd6sAndHighStrikeRate(), batsmenList);
+			List<Batsman> sortedList = iplAnalyser.sort(batsmenComparator.sortByMax4sAnd6sAndHighStrikeRate(), batsmenList);
 			Assert.assertEquals("Andre Russell", sortedList.get(100).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
@@ -75,7 +79,7 @@ public class IPLAnalyserTest {
 	public void givenBatsmenData_ShouldSortBatsmenByMaxAverageAndMaxStrikeRate() {
 		try {
 			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
-			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByAverageAndHighStrikeRate(), batsmenList);
+			List<Batsman> sortedList = iplAnalyser.sort(batsmenComparator.sortByAverageAndHighStrikeRate(), batsmenList);
 			Assert.assertEquals("MS Dhoni", sortedList.get(100).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
@@ -86,8 +90,19 @@ public class IPLAnalyserTest {
 	public void givenBatsmenData_ShouldSortBatsmenByRunsAndBestAverage() {
 		try {
 			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
-			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByRunsAndAverage(), batsmenList);
-			Assert.assertEquals("David Warner ", sortedList.get(100).player);
+			List<Batsman> sortedList = iplAnalyser.sort(batsmenComparator.sortByRunsAndAverage(), batsmenList);
+			Assert.assertEquals("David Warner", sortedList.get(100).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void givenBowlerData_ShouldSortBowlersByAverage() {
+		try {
+			List<Bowler> bowlerList = iplAnalyser.loadCsvFile(BOWLER_CSV_FILE_PATH, Bowler.class);
+			List<Bowler> sortedList = iplAnalyser.sort(bowlerComparator.sortByBowlingAverage(), bowlerList);
+			Assert.assertEquals("Krishnappa Gowtham", sortedList.get(98).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
 		}
