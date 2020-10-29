@@ -10,4 +10,8 @@ public class BowlerSorterComparators {
 		return Comparator.comparing(bowler->bowler.average);
 	}
 
+	public Comparator<Bowler> sortByBowlerStrikeRate() {
+		return Comparator.comparing(bowler->bowler.strikeRate);
+	}
+
 }
