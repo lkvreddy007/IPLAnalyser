@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.capg.dto.AllRounder;
 import com.capg.dto.Batsman;
 import com.capg.dto.Bowler;
 import com.capg.dto.IPLAnalyserException;
+import com.capg.service.AllRounderComparator;
 import com.capg.service.BatsmanSorterComparators;
 import com.capg.service.BowlerSorterComparators;
 import com.capg.service.IPLAnalyser;
@@ -20,6 +22,7 @@ public class IPLAnalyserTest {
 	IPLAnalyser iplAnalyser = new IPLAnalyser();
 	BatsmanSorterComparators batsmenComparator = new BatsmanSorterComparators();
 	BowlerSorterComparators bowlerComparator = new BowlerSorterComparators();
+	AllRounderComparator allRounderComparator = new AllRounderComparator();
 	
 	@Test
 	public void givenBatsmenData_ShouldReturnNoOfBatsman() {
@@ -163,13 +166,25 @@ public class IPLAnalyserTest {
 		}
 	}
 	
-	//UC11
+	//UC12
 	@Test
 	public void givenBowlerData_ShouldSortBowlersByNumOfWicketsAndAverages() {
 		try {
 			List<Bowler> bowlerList = iplAnalyser.loadCsvFile(BOWLER_CSV_FILE_PATH, Bowler.class);
 			List<Bowler> sortedList = iplAnalyser.sort(bowlerComparator.sortByBowlerNumOfWicketsAndAverages(), bowlerList);
 			Assert.assertEquals("Imran Tahir", sortedList.get(98).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//UC13
+	@Test
+	public void givenBowlerData_ShouldSortCricketersByBothBattingAnBowlingAverages() {
+		try {
+			List<AllRounder> allRounderList = iplAnalyser.loadAllRounders();
+			List<AllRounder> sortedList = iplAnalyser.sort(allRounderComparator.sortByCricketersBattingAnBowlingAverages(), allRounderList);
+			Assert.assertEquals("Marcus Stoinis", sortedList.get(sortedList.size()-1).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
 		}
