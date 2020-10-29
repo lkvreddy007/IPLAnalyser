@@ -163,4 +163,16 @@ public class IPLAnalyserTest {
 		}
 	}
 	
+	//UC11
+	@Test
+	public void givenBowlerData_ShouldSortBowlersByNumOfWicketsAndAverages() {
+		try {
+			List<Bowler> bowlerList = iplAnalyser.loadCsvFile(BOWLER_CSV_FILE_PATH, Bowler.class);
+			List<Bowler> sortedList = iplAnalyser.sort(bowlerComparator.sortByBowlerNumOfWicketsAndAverages(), bowlerList);
+			Assert.assertEquals("Imran Tahir", sortedList.get(98).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
