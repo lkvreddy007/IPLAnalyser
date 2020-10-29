@@ -128,12 +128,24 @@ public class IPLAnalyserTest {
 	}
 	
 	//UC9
+	@Test
+	public void givenBowlerData_ShouldSortBowlersByEconomy() {
+		try {
+			List<Bowler> bowlerList = iplAnalyser.loadCsvFile(BOWLER_CSV_FILE_PATH, Bowler.class);
+			List<Bowler> sortedList = iplAnalyser.sort(bowlerComparator.sortByBowlerEconomy(), bowlerList);
+			Assert.assertEquals("Shivam Dube", sortedList.get(0).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//UC10
 		@Test
-		public void givenBowlerData_ShouldSortBowlersByEconomy() {
+		public void givenBowlerData_ShouldSortBowlersByStrikeRatesAnd4wAnd5w() {
 			try {
 				List<Bowler> bowlerList = iplAnalyser.loadCsvFile(BOWLER_CSV_FILE_PATH, Bowler.class);
-				List<Bowler> sortedList = iplAnalyser.sort(bowlerComparator.sortByBowlerEconomy(), bowlerList);
-				Assert.assertEquals("Ben Cutting", sortedList.get(98).player);
+				List<Bowler> sortedList = iplAnalyser.sort(bowlerComparator.sortByBowlerStrikeRateAnd4wAnd5w(), bowlerList);
+				Assert.assertEquals("Krishnappa Gowtham", sortedList.get(98).player);
 			} catch (IPLAnalyserException e) {
 				e.printStackTrace();
 			}
