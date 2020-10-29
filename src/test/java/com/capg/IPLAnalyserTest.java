@@ -32,9 +32,6 @@ public class IPLAnalyserTest {
 		try {
 			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
 			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByBattingAverage(), batsmenList);
-			for(Batsman b:sortedList) {
-				System.out.println(b.player+"--"+b.average);
-			}
 			Assert.assertEquals("MS Dhoni", sortedList.get(100).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
@@ -47,6 +44,17 @@ public class IPLAnalyserTest {
 			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
 			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByStrikeRate(), batsmenList);
 			Assert.assertEquals("Ishant Sharma", sortedList.get(100).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void givenBatsmenData_ShouldReturnMaximumNumberofSixesAndFours() {
+		try {
+			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
+			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByMax4sAnd6s(), batsmenList);
+			Assert.assertEquals("Andre Russell", sortedList.get(100).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
 		}
