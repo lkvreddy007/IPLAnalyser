@@ -30,7 +30,7 @@ public class BatsmanSorterComparators {
 		return Comparator.comparing(batsman -> batsman.runs);
 	}
 
-	public Comparator sortByRunsAndAverage() {
+	public Comparator<Batsman> sortByRunsAndAverage() {
 		return this.sortByRuns().thenComparing(this.sortByBattingAverage());
 	}
 	
