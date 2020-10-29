@@ -18,12 +18,20 @@ public class BatsmanSorterComparators {
 		return Comparator.comparing(batsman->batsman.fours+batsman.sixes);
 	}
 
-	public Comparator sortByMax4sAnd6sAndHighStrikeRate() {
+	public Comparator<Batsman> sortByMax4sAnd6sAndHighStrikeRate() {
 		return this.sortByMax4sAnd6s().thenComparing(this.sortByStrikeRate());
 	}
 
-	public Comparator sortByAverageAndHighStrikeRate() {
+	public Comparator<Batsman> sortByAverageAndHighStrikeRate() {
 		return this.sortByBattingAverage().thenComparing(this.sortByStrikeRate());
+	}
+
+	public Comparator<Batsman> sortByRuns() {
+		return Comparator.comparing(batsman->batsman.runs);
+	}
+
+	public Comparator sortByRunsAndAverage() {
+		return this.sortByRuns().thenComparing(this.sortByBattingAverage());
 	}
 	
 }
