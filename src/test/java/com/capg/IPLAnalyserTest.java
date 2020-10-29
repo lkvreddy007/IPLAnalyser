@@ -41,4 +41,15 @@ public class IPLAnalyserTest {
 		}
 	}
 	
+	@Test
+	public void givenBatsmenData_ShouldReturnHighestStrikeRate() {
+		try {
+			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
+			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByStrikeRate(), batsmenList);
+			Assert.assertEquals("Ishant Sharma", sortedList.get(100).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
