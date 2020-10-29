@@ -21,5 +21,9 @@ public class BatsmanSorterComparators {
 	public Comparator sortByMax4sAnd6sAndHighStrikeRate() {
 		return this.sortByMax4sAnd6s().thenComparing(this.sortByStrikeRate());
 	}
+
+	public Comparator sortByAverageAndHighStrikeRate() {
+		return this.sortByBattingAverage().thenComparing(this.sortByStrikeRate());
+	}
 	
 }
