@@ -14,4 +14,8 @@ public class BowlerSorterComparators {
 		return Comparator.comparing(bowler->bowler.strikeRate);
 	}
 
+	public Comparator<Bowler> sortByBowlerEconomy() {
+		return Comparator.comparing(bowler->bowler.economy);
+	}
+
 }
