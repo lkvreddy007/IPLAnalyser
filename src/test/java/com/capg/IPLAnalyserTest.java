@@ -31,6 +31,7 @@ public class IPLAnalyserTest {
 		}
 	}
 	
+	//UC1
 	@Test
 	public void givenBatsmenData_ShouldSortBatsmenByBattingAverages() {
 		try {
@@ -42,6 +43,7 @@ public class IPLAnalyserTest {
 		}
 	}
 	
+	//UC2
 	@Test
 	public void givenBatsmenData_ShouldSortBatsmenByStrikeRate() {
 		try {
@@ -53,6 +55,7 @@ public class IPLAnalyserTest {
 		}
 	}
 	
+	//UC3
 	@Test
 	public void givenBatsmenData_ShouldSortBatsmenByNumberofSixesAndFours() {
 		try {
@@ -64,6 +67,7 @@ public class IPLAnalyserTest {
 		}
 	}
 	
+	//UC4
 	@Test
 	public void givenBatsmenData_ShouldSortBatsmenByMaximumNumberofSixesAndFoursAndMaxStrikeRate() {
 		try {
@@ -75,6 +79,7 @@ public class IPLAnalyserTest {
 		}
 	}
 	
+	//UC5
 	@Test
 	public void givenBatsmenData_ShouldSortBatsmenByMaxAverageAndMaxStrikeRate() {
 		try {
@@ -86,6 +91,7 @@ public class IPLAnalyserTest {
 		}
 	}
 	
+	//UC6
 	@Test
 	public void givenBatsmenData_ShouldSortBatsmenByRunsAndBestAverage() {
 		try {
@@ -97,11 +103,24 @@ public class IPLAnalyserTest {
 		}
 	}
 	
+	//UC7
 	@Test
 	public void givenBowlerData_ShouldSortBowlersByAverage() {
 		try {
 			List<Bowler> bowlerList = iplAnalyser.loadCsvFile(BOWLER_CSV_FILE_PATH, Bowler.class);
 			List<Bowler> sortedList = iplAnalyser.sort(bowlerComparator.sortByBowlingAverage(), bowlerList);
+			Assert.assertEquals("Krishnappa Gowtham", sortedList.get(98).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//UC8
+	@Test
+	public void givenBowlerData_ShouldSortBowlersByStrikeRate() {
+		try {
+			List<Bowler> bowlerList = iplAnalyser.loadCsvFile(BOWLER_CSV_FILE_PATH, Bowler.class);
+			List<Bowler> sortedList = iplAnalyser.sort(bowlerComparator.sortByBowlerStrikeRate(), bowlerList);
 			Assert.assertEquals("Krishnappa Gowtham", sortedList.get(98).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
