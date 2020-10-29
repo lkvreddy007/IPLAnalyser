@@ -17,5 +17,9 @@ public class BatsmanSorterComparators {
 	public Comparator<Batsman> sortByMax4sAnd6s() {
 		return Comparator.comparing(batsman->batsman.fours+batsman.sixes);
 	}
+
+	public Comparator sortByMax4sAnd6sAndHighStrikeRate() {
+		return this.sortByMax4sAnd6s().thenComparing(this.sortByStrikeRate());
+	}
 	
 }
