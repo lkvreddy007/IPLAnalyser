@@ -9,5 +9,11 @@ public class BatsmanSorterComparators {
 	public Comparator<Batsman> sortByBattingAverage() {
 		return Comparator.comparing(batsman->batsman.average);
 	}
+
+	public Comparator<Batsman> sortByStrikeRate() {
+		return Comparator.comparing(batsman->batsman.strikeRate);
+	}
+	
+	
 	
 }
