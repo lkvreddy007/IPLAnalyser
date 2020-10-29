@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.capg.dto.Batsman;
 import com.capg.dto.IPLAnalyserException;
-import com.capg.service.BatsmanSorterComparators;
+import com.capg.service.SorterComparators;
 import com.capg.service.IPLAnalyser;
 
 import junit.framework.Assert;
@@ -15,7 +15,7 @@ public class IPLAnalyserTest {
 	
 	private static final String BATSMAN_CSV_FILE_PATH = "./src/test/resources/MostRuns.csv";
 	IPLAnalyser iplAnalyser = new IPLAnalyser();
-	BatsmanSorterComparators batsmenComparator = new BatsmanSorterComparators();
+	SorterComparators batsmenComparator = new SorterComparators();
 	
 	@Test
 	public void givenBatsmenData_ShouldReturnNoOfBatsman() {
