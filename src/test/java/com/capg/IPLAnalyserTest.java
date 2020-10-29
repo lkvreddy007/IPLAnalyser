@@ -213,5 +213,17 @@ public class IPLAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+	
+	//UC15
+	@Test
+	public void givenBatsmandData_ShouldSortCricketerswithZeroCenturiesAndHalfCenturiesByBattingAverages() {
+		try {
+			List<Batsman> batsmenList = iplAnalyser.loadBatsmanWithZeroCenturiesAndHalfCenturies();
+			List<Batsman> sortedList = iplAnalyser.sort(batsmenComparator.sortByBattingAverage(), batsmenList);
+			Assert.assertEquals("Marcus Stoinis", sortedList.get(sortedList.size()-1).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
