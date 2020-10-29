@@ -71,4 +71,15 @@ public class IPLAnalyserTest {
 		}
 	}
 	
+	@Test
+	public void givenBatsmenData_ShouldSortBatsmenByMaxAverageAndMaxStrikeRate() {
+		try {
+			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
+			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByAverageAndHighStrikeRate(), batsmenList);
+			Assert.assertEquals("MS Dhoni", sortedList.get(100).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
