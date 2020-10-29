@@ -21,8 +21,8 @@ public class IPLAnalyser<E> {
 	}
 	
 	public List<E> sort(Comparator<E> comparator, List<E> csvList){
-		for(int j=0;j<csvList.size();j++) {
-			for(int i=0;i<csvList.size()-1;i++) {
+		for(int j = 0;j<csvList.size();j++) {
+			for(int i = 0;i<csvList.size()-1;i++) {
 				E player1 = csvList.get(i);
 				E player2 = csvList.get(i+1);
 				if(comparator.compare(player1, player2)>0) {
@@ -44,7 +44,7 @@ public class IPLAnalyser<E> {
 		for(Batsman bat : batsmanList) {
 			for(Bowler bow : bowlerList) {
 				if(bat.player.equals(bow.player)) {
-					allRounderList.add(new AllRounder(bat.player, bat.average, bow.average));
+					allRounderList.add(new AllRounder(bat.player, bat.average, bow.average, bat.runs, bow.wickets));
 				}
 			}
 		}

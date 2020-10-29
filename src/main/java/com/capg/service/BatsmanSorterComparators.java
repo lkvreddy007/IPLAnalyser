@@ -7,15 +7,15 @@ import com.capg.dto.Batsman;
 public class BatsmanSorterComparators {
 
 	public Comparator<Batsman> sortByBattingAverage() {
-		return Comparator.comparing(batsman->batsman.average);
+		return Comparator.comparing(batsman -> batsman.average);
 	}
 
 	public Comparator<Batsman> sortByStrikeRate() {
-		return Comparator.comparing(batsman->batsman.strikeRate);
+		return Comparator.comparing(batsman -> batsman.strikeRate);
 	}
 
 	public Comparator<Batsman> sortByMax4sAnd6s() {
-		return Comparator.comparing(batsman->batsman.fours+batsman.sixes);
+		return Comparator.comparing(batsman -> batsman.fours + batsman.sixes);
 	}
 
 	public Comparator<Batsman> sortByMax4sAnd6sAndHighStrikeRate() {
@@ -27,7 +27,7 @@ public class BatsmanSorterComparators {
 	}
 
 	public Comparator<Batsman> sortByRuns() {
-		return Comparator.comparing(batsman->batsman.runs);
+		return Comparator.comparing(batsman -> batsman.runs);
 	}
 
 	public Comparator sortByRunsAndAverage() {

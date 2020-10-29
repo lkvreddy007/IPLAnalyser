@@ -189,5 +189,17 @@ public class IPLAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+	
+	//UC14
+	@Test
+	public void givenBowlerData_ShouldSortCricketersByRunsAndWickets() {
+		try {
+			List<AllRounder> allRounderList = iplAnalyser.loadAllRounders();
+			List<AllRounder> sortedList = iplAnalyser.sort(allRounderComparator.sortByAllRounderRunsAndWickets(), allRounderList);
+			Assert.assertEquals("Hardik Pandya", sortedList.get(sortedList.size()-1).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
