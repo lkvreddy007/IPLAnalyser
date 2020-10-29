@@ -28,7 +28,7 @@ public class IPLAnalyserTest {
 	}
 	
 	@Test
-	public void givenBatsmenData_ShouldReturnHighestBattingAverage() {
+	public void givenBatsmenData_ShouldSortBatsmenByBattingAverages() {
 		try {
 			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
 			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByBattingAverage(), batsmenList);
@@ -39,7 +39,7 @@ public class IPLAnalyserTest {
 	}
 	
 	@Test
-	public void givenBatsmenData_ShouldReturnHighestStrikeRate() {
+	public void givenBatsmenData_ShouldSortBatsmenByStrikeRate() {
 		try {
 			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
 			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByStrikeRate(), batsmenList);
@@ -50,10 +50,21 @@ public class IPLAnalyserTest {
 	}
 	
 	@Test
-	public void givenBatsmenData_ShouldReturnMaximumNumberofSixesAndFours() {
+	public void givenBatsmenData_ShouldSortBatsmenByNumberofSixesAndFours() {
 		try {
 			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
 			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByMax4sAnd6s(), batsmenList);
+			Assert.assertEquals("Andre Russell", sortedList.get(100).player);
+		} catch (IPLAnalyserException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void givenBatsmenData_ShouldSortBatsmenByMaximumNumberofSixesAndFoursAndMaxStrikeRate() {
+		try {
+			List<Batsman> batsmenList = iplAnalyser.loadCsvFile(BATSMAN_CSV_FILE_PATH, Batsman.class);
+			List<Batsman> sortedList = iplAnalyser.sortBatsmenData(batsmenComparator.sortByMax4sAnd6sAndHighStrikeRate(), batsmenList);
 			Assert.assertEquals("Andre Russell", sortedList.get(100).player);
 		} catch (IPLAnalyserException e) {
 			e.printStackTrace();
